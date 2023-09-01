@@ -1,0 +1,36 @@
+<html>
+	<script>
+		// Überprüfen, ob die Geolocation-API im Browser verfügbar ist
+if ("geolocation" in navigator) {
+  // Geolocation wird unterstützt
+  navigator.geolocation.getCurrentPosition(function (position) {
+    // Die Position wurde erfolgreich ermittelt
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+
+    console.log("Breitengrad: " + latitude);
+    console.log("Längengrad: " + longitude);
+  }, function (error) {
+    // Ein Fehler ist aufgetreten
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        console.error("Der Benutzer hat die Berechtigung zur Standortermittlung verweigert.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        console.error("Standortinformationen sind nicht verfügbar.");
+        break;
+      case error.TIMEOUT:
+        console.error("Die Abfrage der Standortinformationen hat zu lange gedauert.");
+        break;
+      default:
+        console.error("Ein unbekannter Fehler ist aufgetreten.");
+        break;
+    }
+  });
+} else {
+  // Geolocation wird nicht unterstützt
+  console.error("Geolocation wird in diesem Browser nicht unterstützt.");
+}
+	</script>
+
+</html>
